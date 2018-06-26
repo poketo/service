@@ -19,6 +19,8 @@ To load data about a series, send a request to `/series`. You can specify the se
 </script>
 ```
 
+See the response format here: [https://api.poketo.app/series?url=http://merakiscans.com/senryu-girl](https://api.poketo.app/series?url=http://merakiscans.com/senryu-girl)
+
 ### Getting chapter info
 
 If you want to read the pages of an individual chapter, send a request to `/chapter`. Like the series endpoint, you can specify the chapter [by URL](#passing-urls).
@@ -31,7 +33,7 @@ If you want to read the pages of an individual chapter, send a request to `/chap
 </script>
 ```
 
-See the [Node library docs](https://github.com/poketo/node) for the shape of the response.
+See the response format here: [https://api.poketo.app/chapter?url=http://merakiscans.com/senryu-girl/5](https://api.poketo.app/chapter?url=http://merakiscans.com/senryu-girl/5)
 
 ### Passing URLs
 
