@@ -55,7 +55,7 @@ It should be relatively obvious site-to-site which page URLs you'll want to pass
 
 ### Collection actions
 
-Detailed docs for this section are pending. These are only really used by the [Poketo reader](https://poketo.app).
+Detailed docs for this section are pending. These are primarily used by the [Poketo reader](https://poketo.app).
 
 #### Getting series in a collection
 
@@ -63,11 +63,25 @@ Coming soon...
 
 #### Adding and removing bookmarks
 
-Coming soon...
+To add a new bookmark
+
+```
+POST https://api.poketo.app/collection/:slug/bookmark/new
+```
+
+To remove a bookmark
+
+```
+DELETE https://api.poketo.app/collection/:slug/bookmark/:seriesId/read
+```
 
 #### Marking chapters as read
 
-Coming soon...
+```
+POST https://api.poketo.app/collection/:slug/bookmark/:seriesId/read
+```
+
+Looks for a `lastReadAt` field in the JSON body.
 
 ## Miscellaneous
 
