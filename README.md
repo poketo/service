@@ -1,9 +1,7 @@
 poketo-service
 ============
 
-Microservice for scraping manga sites. Used in the [Poketo manga reader](https://poketo.app).
-
-A tiny service that scrapes sites and returns the data as JSON, to build UIs around. Also includes endpoints to store minimal data about collections, as a stop-gap for cross-browser syncing without accounts.
+A microservice for scraping manga sites. Also includes endpoints to store minimal data about collections, as a stop-gap for cross-browser syncing without accounts. Used in the [Poketo manga reader](https://poketo.app).
 
 ## Usage
 
@@ -86,7 +84,7 @@ This service fills those gaps:
 
 ### Colophon
 
-The live version at <api.poketo.app> is deployed on [Now](https://now.sh) and collection data is hosted on a MongoDB database from [mLab](https://mlab.com). Feel free to clone and run your own instance with the same setup!
+The live version at [api.poketo.app](https://api.poketo.app) is deployed on [Now](https://now.sh) and collection data is hosted on a MongoDB database from [mLab](https://mlab.com). Feel free to clone and run your own instance with the same setup!
 
 ### License
 
