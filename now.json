@@ -1,5 +1,5 @@
 {
-  "name": "poketo-api",
+  "name": "poketo-service",
   "alias": "api.poketo.app",
   "public": true,
   "env": {
