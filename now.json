@@ -1,7 +1,6 @@
 {
   "name": "poketo-service",
   "alias": "api.poketo.app",
-  "public": true,
   "env": {
     "MONGO_URL": "@poketo-mongo-url"
   }
