@@ -21,37 +21,8 @@ const invariant = (condition, message) => {
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-const isNumber = val => {
-  return Boolean(val) && !Number.isNaN(val);
-};
-
 const sortChapters = arr => {
-  return arr.slice().sort((a, b) => {
-    const chapterA = parseFloat(a.chapterNumber);
-    const volumeA = parseFloat(a.volumeNumber);
-    const chapterB = parseFloat(b.chapterNumber);
-    const volumeB = parseFloat(b.volumeNumber);
-
-    if (isNumber(volumeA) && isNumber(volumeB)) {
-      if (volumeA < volumeB) {
-        return 1;
-      }
-
-      if (volumeA > volumeB) {
-        return -1;
-      }
-    }
-
-    if (!isNumber(chapterB)) {
-      return -1;
-    }
-
-    if (!isNumber(chapterA)) {
-      return 1;
-    }
-
-    return chapterB - chapterA;
-  });
+  return arr.slice().sort((a, b) => b.order - a.order);
 };
 
 const getNewestChapterId = chapters => chapters.shift().id;
