@@ -117,7 +117,7 @@ app.use(
 
     series.forEach((s, i) => {
       const bookmark = bookmarks[i];
-      newCollection.addBookmark(s, bookmark.linkTo, bookmark.lastReadAt);
+      newCollection.addBookmark(s, bookmark.linkTo, bookmark.lastReadChapterId);
     });
 
     await newCollection.save();
@@ -144,11 +144,11 @@ app.use(
     const collection = await Collection.findOne({ slug });
     ctx.assert(collection, 404);
 
-    const { seriesUrl, linkToUrl = null, lastReadAt } = ctx.request.body;
+    const { seriesUrl, linkToUrl, lastReadChapterId } = ctx.request.body;
 
     ctx.assert(utils.isUrl(seriesUrl), 400, `Invalid URL '${seriesUrl}'`);
     ctx.assert(
-      linkToUrl === null || utils.isUrl(linkToUrl),
+      !linkToUrl || utils.isUrl(linkToUrl),
       400,
       `Invalid URL '${linkToUrl ? linkToUrl : ''}'`,
     );
@@ -158,7 +158,7 @@ app.use(
     // ID through poketo so we're not storing duplicates.
     const series = await poketo.getSeries(seriesUrl);
 
-    collection.addBookmark(series, linkToUrl, lastReadAt);
+    collection.addBookmark(series, linkToUrl, lastReadChapterId);
     await collection.save();
 
     ctx.body = {
@@ -207,22 +207,44 @@ app.use(
         `Could not find bookmark with ID ${seriesId}`,
       );
 
-      const { lastReadAt } = ctx.request.body;
+      const { lastReadAt, lastReadChapterId } = ctx.request.body;
+
+      const hasChapterId = lastReadChapterId || lastReadChapterId === null;
+      const readIndicatorType = hasChapterId ? 'chapterId' : 'timestamp';
+      const hasValidReadIndicator = hasChapterId
+        ? lastReadChapterId === null || utils.isPoketoId(lastReadChapterId)
+        : Number.isInteger(lastReadAt);
 
       ctx.assert(
-        Number.isInteger(lastReadAt),
+        hasValidReadIndicator,
         400,
-        `Could not parse 'lastReadAt' timestamp`,
+        `Could not parse 'lastReadAt' timestamp or 'lastReadChapterId' id`,
       );
 
-      const newBookmark = { ...currentBookmark, lastReadAt };
+      if (readIndicatorType === 'chapterId') {
+        ctx.assert(
+          lastReadChapterId === null ||
+            lastReadChapterId.includes(currentBookmark.id),
+          400,
+          `The ID '${lastReadChapterId}' does not correspond to the series at '${
+            currentBookmark.id
+          }'`,
+        );
+      }
+
+      const newBookmark = { ...currentBookmark };
+      if (readIndicatorType === 'timestamp') {
+        newBookmark.lastReadAt = lastReadAt;
+      } else {
+        newBookmark.lastReadChapterId = lastReadChapterId;
+      }
+
       const newBookmarks = utils.replaceItemAtIndex(
         bookmarks,
         currentBookmarkIndex,
         newBookmark,
       );
       collection.set('bookmarks', newBookmarks);
-
       await collection.save();
 
       ctx.body = newBookmark;

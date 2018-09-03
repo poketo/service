@@ -15,6 +15,12 @@ export default {
     return true;
   },
 
+  isPoketoId: (input: string) => {
+    const components = input.split(':');
+    const isValidId = components.length > 1 && components.length < 4;
+    return isValidId;
+  },
+
   timestamp: () => Math.round(Date.now() / 1000),
 
   /*

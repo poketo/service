@@ -1,7 +1,7 @@
 // @flow
 
 import { Database, Model } from 'mongorito';
-import type { Series } from 'poketo';
+import type { Bookmark, Series } from 'poketo';
 import utils from './utils';
 
 if (process.env.MONGO_URL === undefined && process.env.NOW !== 'true') {
@@ -15,8 +15,8 @@ export class Collection extends Model {}
 const extendCollection = Collection => {
   Collection.prototype.addBookmark = function(
     series: Series,
-    linkToUrl: ?string,
-    lastReadAt: number = utils.timestamp(),
+    linkToUrl: ?string = null,
+    lastReadChapterId: ?string = null,
   ) {
     const bookmarks = this.get('bookmarks');
     const existingBookmark = bookmarks.find(
@@ -31,10 +31,10 @@ const extendCollection = Collection => {
       throw err;
     }
 
-    const bookmark: Object = {
+    const bookmark: Bookmark = {
       id: series.id,
       url: series.url,
-      lastReadAt,
+      lastReadChapterId,
     };
 
     if (linkToUrl) {
