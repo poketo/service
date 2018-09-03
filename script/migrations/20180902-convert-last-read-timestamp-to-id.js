@@ -145,5 +145,5 @@ main().catch(err => {
 // NOTE:
 // const lastChapter = chapters.find(chapter => chapter.id === lastReadChapterId);
 // const unreadChapters = chapters.filter(c => c.order > lastChapter.order);
-// const newChapters = chapters.filter(c => c.createdAt > bookmark.addedAt);
+// const newChapters = chapters.filter(c => c.createdAt > lastChapter.createdAt);
 // const showNewChapters = unreadChapters.length < 5;
