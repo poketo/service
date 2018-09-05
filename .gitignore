@@ -11,3 +11,6 @@ yarn-error.log
 
 # Ignore flow typings
 flow-typed/
+
+# Ignore DB scripts
+script/migrations/
