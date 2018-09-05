@@ -2,8 +2,8 @@
 
 const got = require('got');
 
-const apiBase = 'http://localhost:3001'; // 'https://api.poketo.app';
-const collectionSlug = ADD_YOUR_COLLECTION_SLUG_HERE;
+const apiBase = 'https://api.poketo.app';
+const collectionSlug = 'a4vhAoFG';
 const api = got.extend({
   baseUrl: apiBase,
   json: true,

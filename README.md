@@ -1,5 +1,4 @@
-poketo-service
-============
+# poketo-service
 
 A microservice for scraping manga sites. Also includes endpoints to store minimal data about collections, as a stop-gap for cross-browser syncing without accounts. Used in the [Poketo manga reader](https://poketo.app).
 
@@ -41,15 +40,15 @@ Poketo scrapes sites, so it works by passing in URLs. For a list of supported si
 
 To read a series, you'll need to pass the URL for a chapter index page. Chapter indexes have a listing of all the chapters in a series, and often have details about the series itself. Here are some examples for various sites:
 
-* [Mangadex](https://mangadex.org/manga/15653/dragon-ball-super), `https://mangadex.org/manga/15653`
-* [Manga Stream](https://readms.net/manga/attack_on_titan), `https://readms.net/manga/attack_on_titan`
-* [Jaimini's Box](https://jaiminisbox.com/reader/series/my-hero-academia), `https://jaiminisbox.com/reader/series/my-hero-academia`
+- [Mangadex](https://mangadex.org/manga/15653/dragon-ball-super), `https://mangadex.org/manga/15653`
+- [Manga Stream](https://readms.net/manga/attack_on_titan), `https://readms.net/manga/attack_on_titan`
+- [Jaimini's Box](https://jaiminisbox.com/reader/series/my-hero-academia), `https://jaiminisbox.com/reader/series/my-hero-academia`
 
 To read a chapter, pass the page for that specific chapter. To continue the examples above:
 
-* [Mangadex](https://mangadex.org/chapter/261311/1), `https://mangadex.org/chapter/261311/1`
-* [Manga Stream](https://readms.net/r/attack_on_titan/105/5057/1), `https://readms.net/r/attack_on_titan/105/5057/1`
-* [Jaimini's Box](https://jaiminisbox.com/reader/read/my-hero-academia/en/0/150/page/1), `https://jaiminisbox.com/reader/read/my-hero-academia/en/0/150/page/1`
+- [Mangadex](https://mangadex.org/chapter/261311/1), `https://mangadex.org/chapter/261311/1`
+- [Manga Stream](https://readms.net/r/attack_on_titan/105/5057/1), `https://readms.net/r/attack_on_titan/105/5057/1`
+- [Jaimini's Box](https://jaiminisbox.com/reader/read/my-hero-academia/en/0/150/page/1), `https://jaiminisbox.com/reader/read/my-hero-academia/en/0/150/page/1`
 
 It should be relatively obvious site-to-site which page URLs you'll want to pass in. Plus, most Poketo API responses have URLs included in case you want to reference a chapter after fetching the series details.
 
@@ -81,7 +80,7 @@ DELETE https://api.poketo.app/collection/:slug/bookmark/:seriesId/read
 POST https://api.poketo.app/collection/:slug/bookmark/:seriesId/read
 ```
 
-Looks for a `lastReadAt` field in the JSON body.
+Looks for a `lastReadChapterId` field in the JSON body.
 
 ## Miscellaneous
 
@@ -89,14 +88,14 @@ Looks for a `lastReadAt` field in the JSON body.
 
 It's nice when browsers can handle everything on their own. The fewer servers behind the web, the better. Unfortunately, browsers can't easily:
 
-* Scrape sites on other domains
-* Sync data across devices
-* Persist data on devices over long periods of time
+- Scrape sites on other domains
+- Sync data across devices
+- Persist data on devices over long periods of time
 
 This service fills those gaps:
 
-* Uses Node to scrape scanlator or aggregator sites for series info and chapter images
-* Stores manga collections on a server for permanence and cross-device browsing (but captures as little data as possible ie. no email, no accounts)
+- Uses Node to scrape scanlator or aggregator sites for series info and chapter images
+- Stores manga collections on a server for permanence and cross-device browsing (but captures as little data as possible ie. no email, no accounts)
 
 ### Colophon
 
