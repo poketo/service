@@ -1,7 +1,5 @@
 // @flow
 
-import 'source-map-support/register';
-
 import Koa from 'koa';
 import route from 'koa-route';
 import bodyparser from 'koa-bodyparser';
