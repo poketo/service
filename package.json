@@ -4,7 +4,7 @@
   "private": true,
   "main": "dist/server.js",
   "scripts": {
-    "now-start": "node build/server.js | bunyan -o short",
+    "now-start": "node build/main.js | bunyan -o short",
     "start": "backpack dev | bunyan -o short",
     "build": "backpack build",
     "lint": "xo && flow",
