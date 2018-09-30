@@ -301,7 +301,13 @@ app.use(route.get('/chapter', fetch));
  * Server
  */
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || '3001';
 
-app.listen(PORT);
-console.log(`> Listening on http://localhost:${PORT}`);
+app.listen(PORT, err => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+
+  console.log(`> Listening on http://localhost:${PORT}`);
+});
