@@ -2,9 +2,8 @@
   "name": "poketo-service",
   "version": "0.0.2",
   "private": true,
-  "main": "dist/server.js",
+  "main": "build/main.js",
   "scripts": {
-    "now-start": "node build/main.js | bunyan -o short",
     "start": "backpack dev | bunyan -o short",
     "build": "backpack build",
     "lint": "xo && flow",
@@ -31,6 +30,7 @@
     "got": "^9.2.0",
     "jest": "^22.2.1",
     "prettier": "^1.14.2",
+    "source-map-support": "^0.5.9",
     "xo": "^0.22.0"
   },
   "xo": {
